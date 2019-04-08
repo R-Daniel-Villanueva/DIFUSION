@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://10.11.1.249:5433/springboot #la ip propia d ela maquina fisica
+    #url:jdbc:postgresql://192.168.0.44:5433/pruebabd
+    username: postgres
+    password: project123
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    show-sql: true
+  application:
+    name: beca-service
+  profiles:
+    active: dev
+
+server:
+  port: 9090
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://gatewayservice:8000/eureka
+  instance:
+    leaseRenewalIntervalInSeconds: 5   
+    preferIpAddress: true

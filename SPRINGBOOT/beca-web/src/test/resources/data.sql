@@ -1,0 +1,1 @@
+INSERT INTO login (id, ds_user, ds_pass) VALUES (1, 'Javier', 'Rodriguez');

@@ -19,15 +19,6 @@
             <column name="secondname" type="VARCHAR(35)">
                 <constraints nullable="true" primaryKey="false" unique="false"/>
             </column>
-            <column name="birdthdate" type="VARCHAR(35)">
-                <constraints nullable="true" primaryKey="false" unique="false"/>
-            </column>
-            <column name="email" type="VARCHAR(35)">
-                <constraints nullable="true" primaryKey="false" unique="false"/>
-            </column>
-            <column name="phone" type="VARCHAR(35)">
-                <constraints nullable="true" primaryKey="false" unique="false"/>
-            </column>
             <column name="fk_dataaccess" type="int">
                 <constraints nullable="true" primaryKey="false" unique="true"/>
             </column>
@@ -82,6 +73,68 @@
         EXECUTE PROCEDURE UpdateFK();
     </sql>
 </changeSet>
+<!--TABLE T_TYPES-->      
+    <changeSet author="RQ_DANIEL" id="04082019_0.0.0.6">
+        <createTable tableName="t_types">
+            <column autoIncrement="true" name="id" type="int">
+                <constraints nullable="true" primaryKey="true" unique="true"/>
+            </column>
+            <column name="description" type="VARCHAR(35)">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+<!--TABLE T_SERVICES-->      
+    <changeSet author="RQ_DANIEL" id="04082019_0.0.0.7">
+        <createTable tableName="t_services">
+            <column autoIncrement="true" name="id" type="int">
+                <constraints nullable="true" primaryKey="true" unique="true"/>
+            </column>
+            <column name="name" type="VARCHAR(35)">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+            <column name="description" type="VARCHAR(300)">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+            <column name="mail" type="VARCHAR(35)">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+            <column name="phone" type="VARCHAR(30)">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+            <column name="fk_type" type="int">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+            <column name="fk_user" type="int">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+<!--CONSTRAINT FK TYPES_SERVICES-->       
+    <changeSet author="RQ_DANIEL" id="04082019_0.0.0.8">
+        <addForeignKeyConstraint baseColumnNames="fk_type"
+                baseTableName="t_services"
+                constraintName="fk_types_services"
+                deferrable="true"
+                initiallyDeferred="true"
+                onDelete="CASCADE"
+                onUpdate="RESTRICT"
+                referencedColumnNames="id"
+                referencedTableName="t_types"/>
+    </changeSet>
+<!--CONSTRAINT FK TYPES_SERVICES-->       
+    <changeSet author="RQ_DANIEL" id="04082019_0.0.0.9">
+        <addForeignKeyConstraint baseColumnNames="fk_user"
+                baseTableName="t_services"
+                constraintName="fk_users_services"
+                deferrable="true"
+                initiallyDeferred="true"
+                onDelete="CASCADE"
+                onUpdate="RESTRICT"
+                referencedColumnNames="id"
+                referencedTableName="t_users"/>
+    </changeSet>
+
 
 
 </databaseChangeLog> 
