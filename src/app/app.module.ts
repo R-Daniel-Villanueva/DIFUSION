@@ -9,6 +9,9 @@ import { HomePage } from '../pages/home/home';
 import { RegNewAccountPage } from '../pages/reg-new-account/reg-new-account';
 import { RecuperationaccountPage } from '../pages/recuperationaccount/recuperationaccount';
 import { TrueAccessPage } from '../pages/true-access/true-access';
+import { MysitePage } from '../pages/mysite/mysite';
+import { ServiciosPage } from '../pages/servicios/servicios';
+import { SettingsPage } from '../pages/settings/settings';
 
 
 @NgModule({
@@ -17,7 +20,10 @@ import { TrueAccessPage } from '../pages/true-access/true-access';
     HomePage,
     RegNewAccountPage,
     RecuperationaccountPage,
-    TrueAccessPage
+    TrueAccessPage,
+    MysitePage,
+    ServiciosPage,
+    SettingsPage
   ],
   imports: [
     BrowserModule,
@@ -29,7 +35,10 @@ import { TrueAccessPage } from '../pages/true-access/true-access';
     HomePage,
     RegNewAccountPage,
     RecuperationaccountPage,
-    TrueAccessPage
+    TrueAccessPage,
+    MysitePage,
+    ServiciosPage,
+    SettingsPage
   ],
   providers: [
     StatusBar,

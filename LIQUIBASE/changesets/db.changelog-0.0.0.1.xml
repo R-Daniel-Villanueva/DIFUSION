@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<databaseChangeLog 
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd"> 
+ <!--TABLA T_USERS-->                     
+    <changeSet author="RQ_DANIEL" id="04082019_0.0.0.1">
+        <createTable tableName="t_users">
+            <column autoIncrement="true" name="id" type="int">
+                <constraints nullable="true" primaryKey="true" unique="true" />
+            </column>
+            <column name="name" type="VARCHAR(35)">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+            <column name="lastname" type="VARCHAR(35)">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+            <column name="secondname" type="VARCHAR(35)">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+            <column name="birdthdate" type="VARCHAR(35)">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+            <column name="email" type="VARCHAR(35)">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+            <column name="phone" type="VARCHAR(35)">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+            <column name="fk_dataaccess" type="int">
+                <constraints nullable="true" primaryKey="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+<!--TABLA T_DATAACCESS-->       
+    <changeSet author="RQ_DANIEL" id="04082019_0.0.0.2">
+        <createTable tableName="t_dataaccess">
+            <column autoIncrement="true" name="id" type="int">
+                <constraints nullable="true" primaryKey="true" unique="true"/>
+            </column>
+            <column name="username" type="VARCHAR(35)">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+            <column name="password1" type="VARCHAR(35)">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+            <column name="password2" type="VARCHAR(35)">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+<!--CONSTRAINT FK USERS-DATAACCESS-->       
+    <changeSet author="RQ_DANIEL" id="04082019_0.0.0.3">
+        <addForeignKeyConstraint baseColumnNames="fk_dataaccess"
+                baseTableName="t_users"
+                constraintName="fk_users_dataaccess"
+                deferrable="true"
+                initiallyDeferred="true"
+                onDelete="CASCADE"
+                onUpdate="RESTRICT"
+                referencedColumnNames="id"
+                referencedTableName="t_dataaccess"/>
+    </changeSet>
+<!--FUNCTION UPDATEFK()-->
+<changeSet author="RQ_DANIEL" id="04082019_0.0.0.4">
+    <createProcedure>
+        CREATE OR REPLACE FUNCTION UpdateFK() RETURNS TRIGGER AS $UpdateFK$
+        BEGIN
+            UPDATE t_users set fk_dataaccess=(select id from t_dataaccess where id=lastval()) where id=lastval();
+            return null;
+        END;
+        $UpdateFK$ LANGUAGE plpgsql;
+    </createProcedure>
+</changeSet>
+
+<!--TRIGGER UPDATE_TUSERS-->
+<changeSet author="RQ_DANIEL" id="04082019_0.0.0.5">
+    <sql>    
+        CREATE TRIGGER update_tusers
+        AFTER INSERT ON t_dataaccess FOR EACH ROW
+        EXECUTE PROCEDURE UpdateFK();
+    </sql>
+</changeSet>
+
+
+</databaseChangeLog> 

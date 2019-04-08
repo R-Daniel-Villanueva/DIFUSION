@@ -19,16 +19,16 @@
   </ion-header>
   <ion-content>
     <ion-list>
-      <button ion-item>
+      <button (click)="goHome()" ion-item>
           <ion-icon name="home"> Inicio</ion-icon>
       </button>
-      <button ion-item>
+      <button (click)="goServices()" ion-item>
           <ion-icon name="contacts"> Servicios</ion-icon>
       </button>
-      <button ion-item>
+      <button (click)="goMySite()" ion-item>
           <ion-icon name="settings"> Mi sitio</ion-icon>
       </button>
-      <button ion-item>
+      <button (click)="goSettings()" ion-item>
           <ion-icon name="settings"> Configuraciones</ion-icon>
       </button>
       <button (click)="logOut()" ion-item>
