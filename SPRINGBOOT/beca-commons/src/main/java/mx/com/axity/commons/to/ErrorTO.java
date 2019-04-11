@@ -3,8 +3,12 @@ package mx.com.axity.commons.to;
 import java.io.Serializable;
 
 public class ErrorTO implements Serializable {
+
     private Long errorCode;
     private String errorMessage;
+
+    public ErrorTO() {
+    }
 
     public Long getErrorCode() {
         return errorCode;
@@ -20,8 +24,5 @@ public class ErrorTO implements Serializable {
 
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
-    }
-
-    public ErrorTO() {
     }
 }

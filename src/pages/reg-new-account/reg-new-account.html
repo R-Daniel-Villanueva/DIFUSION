@@ -12,32 +12,37 @@
 
 <ion-content padding>
 
-    <ion-list class="list2">
+    <form [formGroup]="createForm">
+      
+  <ion-list class="list">
       <ion-item  no-lines>
         <ion-label floating>Nombre(s)</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input formControlName="name" type="text"></ion-input>
       </ion-item>
       <ion-item  no-lines>
         <ion-label floating>Apellido Paterno</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input formControlName="lastname" type="text"></ion-input>
       </ion-item>
       <ion-item  no-lines>
         <ion-label floating>Apellido Materno</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input formControlName="secondname" type="text"></ion-input>
       </ion-item>
       <ion-item  no-lines>
         <ion-label floating>Username</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input formControlName="username" type="text"></ion-input>
       </ion-item>
       <ion-item no-lines >
           <ion-label floating>Password</ion-label>
-          <ion-input type="password"></ion-input>
+          <ion-input  formControlName="password1" type="password"></ion-input>
       </ion-item>
       <ion-item no-lines>
           <ion-label floating>Confirmar Password</ion-label>
-          <ion-input type="password"></ion-input>
+          <ion-input formControlName="password2" type="password"></ion-input>
       </ion-item>
       <br>
-      <button class="button" ion-button small round>Guardar</button>
+          <button (click)="CreateUser()" class="button" ion-button small round>Guardar</button>
+          
     </ion-list>
+    </form>
+  
 </ion-content>

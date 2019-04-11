@@ -1,18 +1,31 @@
 package mx.com.axity.services.facade;
 
+import mx.com.axity.commons.to.LoginTO;
 import mx.com.axity.commons.to.UserTO;
 import mx.com.axity.model.UserDO;
 
 import java.util.List;
 
 public interface IbecaFacade {
+  List<UserTO> getAllUsers();
+  void saveUser(UserTO userTO);
+/*
+    int operation(int num1, int num2);
 
-    List<UserTO> getAllLogin();
-    UserTO getIdLogin(Long id);
-    void deleteLogin(Long id);
-    void insertLogin(UserDO loginDO);
-    void updateLogin(UserDO loginDO);
+    List<UserTO> getAllUsers();
 
-    UserTO acceso(UserTO userTO);
+    void createUser(UserTO userTO);
+    void updateUser(UserTO userTO);
+    UserTO readUser(int id);
+    void deleteUser(int id);
 
+    List<LoginTO> getAllLogins();
+
+    void createLogin(LoginTO loginTO);
+    void updateLogin(LoginTO loginTO);
+    LoginTO readLogin(int id);
+    void deleteLogin(int id);
+
+    UserTO makeLogin(LoginTO loginTO);
+*/
 }

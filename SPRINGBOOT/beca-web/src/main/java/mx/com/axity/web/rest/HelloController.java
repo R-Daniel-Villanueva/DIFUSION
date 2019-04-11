@@ -1,8 +1,8 @@
 package mx.com.axity.web.rest;
 
 import io.swagger.annotations.Api;
+import mx.com.axity.commons.to.LoginTO;
 import mx.com.axity.commons.to.UserTO;
-import mx.com.axity.model.UserDO;
 import mx.com.axity.services.facade.IbecaFacade;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,75 +15,164 @@ import java.util.List;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*", allowCredentials = "true")
 @RestController
-@RequestMapping("beca")
-@Api(value="beca", description="Operaciones con beca")
+@RequestMapping("aplication")
+@Api(value="aplication", description="Operaciones con aplication")
 public class HelloController {
 
+  static final Logger LOG =LogManager.getLogger(HelloController.class);
+
+  @Autowired
+  IbecaFacade IbecaFacade;
+  @RequestMapping(value = "/users", method = RequestMethod.GET, produces = "application/json")
+  public ResponseEntity<List<UserTO>> getAllUsers(){
+    LOG.info("SE INVOCA /USERS");
+    List<UserTO> users= this.IbecaFacade.getAllUsers();
+    return new ResponseEntity<>(users,HttpStatus.OK);
+  }
+
+  @RequestMapping(value = "/save", method = RequestMethod.POST,produces = "application/json")
+  public ResponseEntity saveUser(@RequestBody UserTO userTO){
+    LOG.info("Se invoca /saveUser");
+    this.IbecaFacade.saveUser(userTO);
+    return new ResponseEntity<>(HttpStatus.OK);
+  }
+
+
+
+
+  /*
+  @RequestMapping(value = "/create_user", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity createUser(@RequestBody UserTO userTO) {
+        LOG.info("Se invoca /create_user");
+        this.IbecaFacade.createUser(userTO);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+  */
+/*
     static final Logger LOG = LogManager.getLogger(HelloController.class);
 
     //@Autowired
     //RestTemplate restTemplate;
-////////////////////////////////////////////////////////////////////////////////////////7
+
     @Autowired
     IbecaFacade IbecaFacade;
-    //METODO PARA CONSULTAR TODOS LOS REGISTROS EXISTENTES
-    @RequestMapping(value = "/login", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<List<UserTO>> getAllLogin() {
-        LOG.info("Se invoca /login");
-        List<UserTO> users = this.IbecaFacade.getAllLogin();
+
+    @RequestMapping(value = "/users", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<List<UserTO>> getAllUsers() {
+        LOG.info("Se invoca /users");
+        List<UserTO> users = this.IbecaFacade.getAllUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
-    //METODO PARA COSNULTAR UN REGISTRO EN BASE A SU ID
-    @RequestMapping(value = "/idlogin", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<UserTO> getIdLogin(@RequestParam(value="id")long id) {
-        LOG.info("Se invoca /idlogin");
-        LOG.info(id);
-        UserTO users = this.IbecaFacade.getIdLogin((long) id);
-        if(users.getId()!=null){
-            return new ResponseEntity<>(users, HttpStatus.OK);
-        }else{
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-    }
-    //METODO PARA ELIMINAR UN REGISTRO EN BASE A SU ID
-    @RequestMapping(value = "/deletelogin", method = RequestMethod.DELETE, produces = "application/json")
-    public ResponseEntity<UserTO> deleteLogin(@RequestParam(value="id")long id) {
-        LOG.info("Se invoca /deletelogin");
-        LOG.info(id);
-        this.IbecaFacade.deleteLogin(id);
+
+    @RequestMapping(value = "/create_user", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity createUser(@RequestBody UserTO userTO) {
+        LOG.info("Se invoca /create_user");
+        this.IbecaFacade.createUser(userTO);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    //METODO PARA GUARDAR UN REGISTRO EN BASE A SU ID
-    @RequestMapping(value = "/savelogin", method = RequestMethod.POST, produces = "application/json")
-    public ResponseEntity<UserTO> insertLogin(@RequestBody UserDO userDO) {
-        LOG.info("Se invoca /savelogin");
-        LOG.info(userDO);
-        if(userDO.getPass()!=null&&userDO.getUser()!=null){
-            this.IbecaFacade.insertLogin(userDO);
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    }
-    //METODO PARA ACTUALIZAR UN REGISTRO EN BASE A SU ID
-    @RequestMapping(value = "/updatelogin", method = RequestMethod.PUT, produces = "application/json")
-    public ResponseEntity<UserTO> updateLogin(@RequestBody UserDO userDO) {
-        LOG.info("Se invoca /updatelogin");
-        LOG.info(userDO);
-        if(userDO.getId()!=null&&userDO.getUser()!=null&&userDO.getPass()!=null){
-            this.IbecaFacade.updateLogin(userDO);
-            return new ResponseEntity<>(HttpStatus.OK);
-        }else{
-            return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-        }
+
+    @RequestMapping(value = "/update_user", method = RequestMethod.PUT, produces = "application/json")
+    public ResponseEntity updateUser(@RequestBody UserTO userTO) {
+        LOG.info("Se invoca /update_user");
+        this.IbecaFacade.updateUser(userTO);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    //METODO PARA LOGUEAR
-    @RequestMapping(value = "/acceso", method = RequestMethod.POST, produces = "application/json")
-    public ResponseEntity<UserTO> validateUserAndPass(@RequestBody UserTO userTO) {
-        LOG.info("Se invoca /acceso");
-        LOG.info(userTO);
-        UserTO users = this.IbecaFacade.acceso(userTO);
-            return new ResponseEntity<>(users, HttpStatus.OK);
+    @RequestMapping(value = "/read_user", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<UserTO> readUser(@RequestParam(value = "id") int id) {
+        LOG.info("Se invoca /read_user");
+        UserTO user = this.IbecaFacade.readUser(id);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/delete_user", method = RequestMethod.DELETE, produces = "application/json")
+    public ResponseEntity deleteUser(@RequestParam(value = "id") int id) {
+        LOG.info("Se invoca /delete_user");
+        this.IbecaFacade.deleteUser(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/users", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity saveUser(@RequestBody UserTO userTO) {
+
+        LOG.info("User");
+        LOG.info(userTO.getName());
+        LOG.info(userTO.getAge());
+        LOG.info(userTO.getId());
+        LOG.info(userTO.getLastName());
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/user", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity findUser(@RequestParam(value = "id") int id) {
+
+        LOG.info("User id:");
+        LOG.info(id);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/test", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity test() {
+        LOG.info("Se invoca /test");
+        return new ResponseEntity<>("Prueba Ok", HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/operation", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity operation() {
+        LOG.info("Se invoca /operation");
+        int result = this.IbecaFacade.operation(5, 10);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    //EMPIEZA CRUD DE LOGIN
+
+
+    @RequestMapping(value = "/logins", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<List<LoginTO>> getAllLogins() {
+        LOG.info("Se invoca /logins");
+        List<LoginTO> logins = this.IbecaFacade.getAllLogins();
+        return new ResponseEntity<>(logins, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity createLogin(@RequestBody LoginTO loginTO) {
+        LOG.info("Se invoca /login");
+        this.IbecaFacade.createLogin(loginTO);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.PUT, produces = "application/json")
+    public ResponseEntity updateLogin(@RequestBody LoginTO loginTO) {
+        LOG.info("Se invoca /login");
+        this.IbecaFacade.updateLogin(loginTO);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<LoginTO> readLogin(@RequestParam(value = "id") int id) {
+        LOG.info("Se invoca /login");
+        LoginTO login = this.IbecaFacade.readLogin(id);
+        return new ResponseEntity<>(login, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.DELETE, produces = "application/json")
+    public ResponseEntity deleteLogin(@RequestParam(value = "id") int id) {
+        LOG.info("Se invoca /login");
+        this.IbecaFacade.deleteLogin(id);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    //MAKE LOGIN
+
+    @RequestMapping(value = "/makelogin", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity<UserTO> makeLogin(@RequestBody LoginTO loginTO) {
+      LOG.info("Se invoca /makelogin");
+      UserTO userTO = this.IbecaFacade.makeLogin(loginTO);
+      return new ResponseEntity<>(userTO, HttpStatus.OK);
 
     }
+*/
 }

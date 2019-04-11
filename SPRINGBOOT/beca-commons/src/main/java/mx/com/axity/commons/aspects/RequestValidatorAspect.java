@@ -32,16 +32,20 @@ public class RequestValidatorAspect {
             LOG.info("Exception Ocurred");
             LOG.info("Execution: {}", joinPoint.getSignature());
             LOG.info("Exception: {}", e.getMessage());
-            //throw new BusinessException("Error", e);
-            if(e instanceof NoSuchElementException){
-                errorTO =new ErrorTO();
-                errorTO.setErrorCode((long)25);
-                errorTO.setErrorMessage("EL ELEMENTO NO EXISTE");
-            }else{
-                errorTO =new ErrorTO();
-                errorTO.setErrorCode((long)50);
-                errorTO.setErrorMessage("ERROR EN EL SERVIDOR");
+
+            if (e instanceof NoSuchElementException){
+                errorTO = new ErrorTO();
+                errorTO.setErrorCode((long) 403);
+                errorTO.setErrorMessage("Usuario y/o contraseña incorrecto");
             }
+            else{
+                errorTO = new ErrorTO();
+                errorTO.setErrorCode((long) 500);
+                errorTO.setErrorMessage("Error de servidor");
+            }
+
+            //ESTE BORRAR
+            //throw new BusinessException("Error", e);
             return new ResponseEntity<ErrorTO>(errorTO, HttpStatus.NOT_FOUND);
         }
     }

@@ -12,6 +12,8 @@ import { TrueAccessPage } from '../pages/true-access/true-access';
 import { MysitePage } from '../pages/mysite/mysite';
 import { ServiciosPage } from '../pages/servicios/servicios';
 import { SettingsPage } from '../pages/settings/settings';
+import { UserserviceProvider } from '../providers/userservice/userservice';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -27,7 +29,8 @@ import { SettingsPage } from '../pages/settings/settings';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -43,7 +46,8 @@ import { SettingsPage } from '../pages/settings/settings';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    UserserviceProvider
   ]
 })
 export class AppModule {}

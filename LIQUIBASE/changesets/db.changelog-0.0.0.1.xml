@@ -19,17 +19,6 @@
             <column name="secondname" type="VARCHAR(35)">
                 <constraints nullable="true" primaryKey="false" unique="false"/>
             </column>
-            <column name="fk_dataaccess" type="int">
-                <constraints nullable="true" primaryKey="false" unique="true"/>
-            </column>
-        </createTable>
-    </changeSet>
-<!--TABLA T_DATAACCESS-->       
-    <changeSet author="RQ_DANIEL" id="04082019_0.0.0.2">
-        <createTable tableName="t_dataaccess">
-            <column autoIncrement="true" name="id" type="int">
-                <constraints nullable="true" primaryKey="true" unique="true"/>
-            </column>
             <column name="username" type="VARCHAR(35)">
                 <constraints nullable="true" primaryKey="false" unique="false"/>
             </column>
@@ -41,40 +30,8 @@
             </column>
         </createTable>
     </changeSet>
-<!--CONSTRAINT FK USERS-DATAACCESS-->       
-    <changeSet author="RQ_DANIEL" id="04082019_0.0.0.3">
-        <addForeignKeyConstraint baseColumnNames="fk_dataaccess"
-                baseTableName="t_users"
-                constraintName="fk_users_dataaccess"
-                deferrable="true"
-                initiallyDeferred="true"
-                onDelete="CASCADE"
-                onUpdate="RESTRICT"
-                referencedColumnNames="id"
-                referencedTableName="t_dataaccess"/>
-    </changeSet>
-<!--FUNCTION UPDATEFK()-->
-<changeSet author="RQ_DANIEL" id="04082019_0.0.0.4">
-    <createProcedure>
-        CREATE OR REPLACE FUNCTION UpdateFK() RETURNS TRIGGER AS $UpdateFK$
-        BEGIN
-            UPDATE t_users set fk_dataaccess=(select id from t_dataaccess where id=lastval()) where id=lastval();
-            return null;
-        END;
-        $UpdateFK$ LANGUAGE plpgsql;
-    </createProcedure>
-</changeSet>
-
-<!--TRIGGER UPDATE_TUSERS-->
-<changeSet author="RQ_DANIEL" id="04082019_0.0.0.5">
-    <sql>    
-        CREATE TRIGGER update_tusers
-        AFTER INSERT ON t_dataaccess FOR EACH ROW
-        EXECUTE PROCEDURE UpdateFK();
-    </sql>
-</changeSet>
 <!--TABLE T_TYPES-->      
-    <changeSet author="RQ_DANIEL" id="04082019_0.0.0.6">
+    <changeSet author="RQ_DANIEL" id="04082019_0.0.0.2">
         <createTable tableName="t_types">
             <column autoIncrement="true" name="id" type="int">
                 <constraints nullable="true" primaryKey="true" unique="true"/>
@@ -85,7 +42,7 @@
         </createTable>
     </changeSet>
 <!--TABLE T_SERVICES-->      
-    <changeSet author="RQ_DANIEL" id="04082019_0.0.0.7">
+    <changeSet author="RQ_DANIEL" id="04082019_0.0.0.3">
         <createTable tableName="t_services">
             <column autoIncrement="true" name="id" type="int">
                 <constraints nullable="true" primaryKey="true" unique="true"/>
@@ -102,6 +59,9 @@
             <column name="phone" type="VARCHAR(30)">
                 <constraints nullable="true" primaryKey="false" unique="false"/>
             </column>
+            <column name="ubication" type="VARCHAR(30)">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
             <column name="fk_type" type="int">
                 <constraints nullable="true" primaryKey="false" unique="false"/>
             </column>
@@ -111,7 +71,7 @@
         </createTable>
     </changeSet>
 <!--CONSTRAINT FK TYPES_SERVICES-->       
-    <changeSet author="RQ_DANIEL" id="04082019_0.0.0.8">
+    <changeSet author="RQ_DANIEL" id="04082019_0.0.0.4">
         <addForeignKeyConstraint baseColumnNames="fk_type"
                 baseTableName="t_services"
                 constraintName="fk_types_services"
@@ -122,8 +82,8 @@
                 referencedColumnNames="id"
                 referencedTableName="t_types"/>
     </changeSet>
-<!--CONSTRAINT FK TYPES_SERVICES-->       
-    <changeSet author="RQ_DANIEL" id="04082019_0.0.0.9">
+<!--CONSTRAINT FK USER_SERVICES-->       
+    <changeSet author="RQ_DANIEL" id="04082019_0.0.0.5">
         <addForeignKeyConstraint baseColumnNames="fk_user"
                 baseTableName="t_services"
                 constraintName="fk_users_services"
@@ -134,7 +94,4 @@
                 referencedColumnNames="id"
                 referencedTableName="t_users"/>
     </changeSet>
-
-
-
 </databaseChangeLog> 
