@@ -1,3 +1,19 @@
 page-mysite {
-
+    .fab-ios {
+        //color: #fff;
+        background-color: darkblue;
+    }
+    .item-ios p{
+        color:#8e9093;
+    }
+    .description_p{
+        height:50px;
+        overflow: hidden;
+        padding: 2px;
+        text-align: justify;
+    }
+    p.post_p,h2.post_p{
+        white-space: normal;
+        text-align: justify;
+    }
 }

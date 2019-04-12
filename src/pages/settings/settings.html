@@ -6,10 +6,74 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>settings</ion-title>
+    <ion-title>Información</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-
+  <div padding>
+    <ion-segment [(ngModel)]="Tipo">
+      <ion-segment-button value="Usuario">
+        Usuario
+      </ion-segment-button>
+      <ion-segment-button value="Servicio">
+        Servicio
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+  
+  <div [ngSwitch]="Tipo">
+    <ion-list *ngSwitchDefault="">
+      <ion-item  no-lines>
+        <ion-label floating>Nombre(s)</ion-label>
+        <ion-input  type="text"></ion-input>
+      </ion-item>
+      <ion-item  no-lines>
+        <ion-label floating>Apellido Paterno</ion-label>
+        <ion-input  type="text"></ion-input>
+      </ion-item>
+      <ion-item  no-lines>
+        <ion-label floating>Apellido Materno</ion-label>
+        <ion-input  type="text"></ion-input>
+      </ion-item>
+      <ion-item  no-lines>
+        <ion-label floating>Username</ion-label>
+        <ion-input  type="text"></ion-input>
+      </ion-item>
+      <ion-item no-lines >
+          <ion-label floating>Password</ion-label>
+          <ion-input type="password"></ion-input>
+      </ion-item>
+      <ion-item no-lines>
+          <ion-label floating>Confirmar Password</ion-label>
+          <ion-input type="password"></ion-input>
+      </ion-item>
+      <br>
+          <button class="button" ion-button small round>Guardar</button>
+          
+    </ion-list>
+  
+    <ion-list *ngSwitchCase="'Servicio'">
+      <ion-item  no-lines>
+        <ion-label floating>Nombre</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+      <ion-item  no-lines>
+        <ion-label floating>Fotografia</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+      <ion-item  no-lines>
+        <ion-label floating>Ubicacion</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+      <div class="divdesc">
+        <ion-label class="labeldescription">Descripcion</ion-label>
+        <textarea class="tareadescription"></textarea>
+      </div>
+      <br>
+          <button class="button" ion-button small round>Guardar</button>
+          
+    </ion-list>
+  </div>
+  
 </ion-content>
