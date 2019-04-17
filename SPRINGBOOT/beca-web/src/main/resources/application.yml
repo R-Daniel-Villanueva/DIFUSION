@@ -5,6 +5,8 @@ spring:
     #password: password
 
     url: jdbc:postgresql://localhost:5432/aplication
+    #url: jdbc:postgresql://10.11.3.177:5432/aplication
+
     username: postgres
     password: root2013
 

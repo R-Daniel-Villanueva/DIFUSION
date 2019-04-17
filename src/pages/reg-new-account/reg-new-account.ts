@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-an
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RegistroUsuarios } from '../../model/usersmodel';
 import { UserserviceProvider } from '../../providers/userservice/userservice';
+import { HomePage } from '../home/home';
+
 /**
  * Generated class for the RegNewAccountPage page.
  *
@@ -56,6 +58,7 @@ export class RegNewAccountPage {
     },()=>{
       console.log('Success');
       PresentLoading.dismiss();
+      this.navCtrl.push(HomePage);
     });
   }
 

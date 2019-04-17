@@ -12,7 +12,7 @@
 
 <ion-content padding>
   <div padding>
-    <ion-segment [(ngModel)]="Tipo">
+    <ion-segment  color="bussines-color-primary" [(ngModel)]="Tipo">
       <ion-segment-button value="Usuario">
         Usuario
       </ion-segment-button>
@@ -22,7 +22,7 @@
     </ion-segment>
   </div>
   
-  <div [ngSwitch]="Tipo">
+  <div color="selectg" [ngSwitch]="Tipo">
     <ion-list *ngSwitchDefault="">
       <ion-item  no-lines>
         <ion-label floating>Nombre(s)</ion-label>
@@ -49,7 +49,7 @@
           <ion-input type="password"></ion-input>
       </ion-item>
       <br>
-          <button class="button" ion-button small round>Guardar</button>
+          <button class="button" color="bussines-color-primary" ion-button small round>Guardar</button>
           
     </ion-list>
   
@@ -67,11 +67,11 @@
         <ion-input type="text"></ion-input>
       </ion-item>
       <div class="divdesc">
-        <ion-label class="labeldescription">Descripcion</ion-label>
+        <ion-label color="selectg" class="labeldescription">Descripcion</ion-label>
         <textarea class="tareadescription"></textarea>
       </div>
       <br>
-          <button class="button" ion-button small round>Guardar</button>
+          <button class="button"  color="bussines-color-primary" ion-button small round>Guardar</button>
           
     </ion-list>
   </div>
