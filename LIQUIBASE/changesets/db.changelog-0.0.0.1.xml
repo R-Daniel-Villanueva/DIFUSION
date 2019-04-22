@@ -4,75 +4,53 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd"> 
- <!--TABLA T_USERS-->                     
-    <changeSet author="RQ_DANIEL" id="04082019_0.0.0.1">
-        <createTable tableName="t_users">
-            <column autoIncrement="true" name="id" type="int">
-                <constraints nullable="true" primaryKey="true" unique="true" />
-            </column>
-            <column name="name" type="VARCHAR(35)">
-                <constraints nullable="true" primaryKey="false" unique="false"/>
-            </column>
-            <column name="lastname" type="VARCHAR(35)">
-                <constraints nullable="true" primaryKey="false" unique="false"/>
-            </column>
-            <column name="secondname" type="VARCHAR(35)">
-                <constraints nullable="true" primaryKey="false" unique="false"/>
-            </column>
-            <column name="username" type="VARCHAR(35)">
-                <constraints nullable="true" primaryKey="false" unique="false"/>
-            </column>
-            <column name="password1" type="VARCHAR(35)">
-                <constraints nullable="true" primaryKey="false" unique="false"/>
-            </column>
-            <column name="password2" type="VARCHAR(35)">
-                <constraints nullable="true" primaryKey="false" unique="false"/>
-            </column>
-        </createTable>
-    </changeSet>
+                      
 <!--TABLE T_TYPES-->      
-    <changeSet author="RQ_DANIEL" id="04082019_0.0.0.2">
-        <createTable tableName="t_types">
+    <changeSet author="RQ_DANIEL" id="04082019_0.0.0.1">
+        <createTable tableName="t_kinds">
             <column autoIncrement="true" name="id" type="int">
                 <constraints nullable="true" primaryKey="true" unique="true"/>
             </column>
-            <column name="description" type="VARCHAR(35)">
+            <column name="description" type="VARCHAR(30)">
                 <constraints nullable="true" primaryKey="false" unique="false"/>
             </column>
         </createTable>
     </changeSet>
 <!--TABLE T_SERVICES-->      
-    <changeSet author="RQ_DANIEL" id="04082019_0.0.0.3">
+    <changeSet author="RQ_DANIEL" id="04082019_0.0.0.2">
         <createTable tableName="t_services">
             <column autoIncrement="true" name="id" type="int">
                 <constraints nullable="true" primaryKey="true" unique="true"/>
             </column>
-            <column name="name" type="VARCHAR(35)">
+            <column name="name" type="VARCHAR(50)">
                 <constraints nullable="true" primaryKey="false" unique="false"/>
             </column>
             <column name="description" type="VARCHAR(300)">
                 <constraints nullable="true" primaryKey="false" unique="false"/>
             </column>
-            <column name="mail" type="VARCHAR(35)">
+            <column name="mail" type="VARCHAR(50)">
                 <constraints nullable="true" primaryKey="false" unique="false"/>
             </column>
-            <column name="phone" type="VARCHAR(30)">
+            <column name="phone" type="VARCHAR(15)">
                 <constraints nullable="true" primaryKey="false" unique="false"/>
             </column>
-            <column name="ubication" type="VARCHAR(30)">
+            <column name="ubication" type="VARCHAR(200)">
                 <constraints nullable="true" primaryKey="false" unique="false"/>
             </column>
-            <column name="fk_type" type="int">
+            <column name="address" type="VARCHAR(300)">
                 <constraints nullable="true" primaryKey="false" unique="false"/>
             </column>
-            <column name="fk_user" type="int">
+            <column name="views" type="int">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+            <column name="fk_kind" type="int">
                 <constraints nullable="true" primaryKey="false" unique="false"/>
             </column>
         </createTable>
     </changeSet>
-<!--CONSTRAINT FK TYPES_SERVICES-->       
-    <changeSet author="RQ_DANIEL" id="04082019_0.0.0.4">
-        <addForeignKeyConstraint baseColumnNames="fk_type"
+<!--CONSTRAINT FK KIND_SERVICES-->       
+    <changeSet author="RQ_DANIEL" id="04082019_0.0.0.3">
+        <addForeignKeyConstraint baseColumnNames="fk_kind"
                 baseTableName="t_services"
                 constraintName="fk_types_services"
                 deferrable="true"
@@ -80,12 +58,59 @@
                 onDelete="CASCADE"
                 onUpdate="RESTRICT"
                 referencedColumnNames="id"
-                referencedTableName="t_types"/>
+                referencedTableName="t_kinds"/>
     </changeSet>
-<!--CONSTRAINT FK USER_SERVICES-->       
+
+
+
+
+
+
+ <!--TABLA T_USERS-->                     
+    <changeSet author="RQ_DANIEL" id="04082019_0.0.0.4">
+        <createTable tableName="t_users">
+            <column autoIncrement="true" name="id" type="int">
+                <constraints nullable="true" primaryKey="true" unique="true" />
+            </column>
+            <column name="name" type="VARCHAR(50)">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+            <column name="lastname" type="VARCHAR(50)">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+            <column name="secondname" type="VARCHAR(50)">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+            <column name="username" type="VARCHAR(50)">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+            <column name="password1" type="VARCHAR(50)">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+            <column name="password2" type="VARCHAR(50)">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+<!--TABLE T_OWNER-->      
     <changeSet author="RQ_DANIEL" id="04082019_0.0.0.5">
+        <createTable tableName="t_owner">
+            <column autoIncrement="true" name="id" type="int">
+                <constraints nullable="true" primaryKey="true" unique="true"/>
+            </column>
+            <column name="fk_user" type="int">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+            <column name="fk_services" type="int">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+<!--CONSTRAINT FK USER_OWNER-->       
+    <changeSet author="RQ_DANIEL" id="04082019_0.0.0.6">
         <addForeignKeyConstraint baseColumnNames="fk_user"
-                baseTableName="t_services"
+                baseTableName="t_owner"
                 constraintName="fk_users_services"
                 deferrable="true"
                 initiallyDeferred="true"
@@ -93,5 +118,17 @@
                 onUpdate="RESTRICT"
                 referencedColumnNames="id"
                 referencedTableName="t_users"/>
+    </changeSet>
+<!--CONSTRAINT FK SERVICES_OWNER-->       
+    <changeSet author="RQ_DANIEL" id="04082019_0.0.0.7">
+        <addForeignKeyConstraint baseColumnNames="fk_services"
+                baseTableName="t_owner"
+                constraintName="fk_services_owner"
+                deferrable="true"
+                initiallyDeferred="true"
+                onDelete="CASCADE"
+                onUpdate="RESTRICT"
+                referencedColumnNames="id"
+                referencedTableName="t_services"/>
     </changeSet>
 </databaseChangeLog> 
