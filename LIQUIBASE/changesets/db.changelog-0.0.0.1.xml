@@ -131,4 +131,10 @@
                 referencedColumnNames="id"
                 referencedTableName="t_services"/>
     </changeSet>
+<!--ALTER TABLE-->    
+    <changeSet author="RQ_DANIEL" id="04232019_0.0.0.8">
+        <addColumn schemaName="public" tableName="t_services">
+            <column name="picture" type="varchar(100)"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog> 

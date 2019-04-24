@@ -2,8 +2,10 @@ package mx.com.axity.services.service.impl;
 
 import mx.com.axity.commons.to.UserTO;
 import mx.com.axity.model.LoginDO;
+import mx.com.axity.model.ServicesDO;
 import mx.com.axity.model.UserDO;
 import mx.com.axity.persistence.LoginDAO;
+import mx.com.axity.persistence.ServicesDAO;
 import mx.com.axity.persistence.UserDAO;
 import mx.com.axity.services.service.IbecaService;
 import org.apache.logging.log4j.LogManager;
@@ -21,18 +23,32 @@ public class becaServiceImpl implements IbecaService {
 
   static final Logger LOG =LogManager.getLogger(becaServiceImpl.class);
 
-  @Autowired
-    UserDAO userDAO;
-  @Autowired
-    ModelMapper modelMapper;
-  @Override
-    public List<UserDO> getAllUsers(){
+  /*INICIA CONFIGURACION DE USUARIO*/
+    @Autowired
+      UserDAO userDAO;
+    @Autowired
+      ModelMapper modelMapper;
+    @Override
+      public List<UserDO> getAllUsers(){
       return (List<UserDO>) this.userDAO.findAll();
     }
-   @Override
-    public void saveUser(UserDO userDO){
-    this.userDAO.save(userDO);
-   }
+    @Override
+      public void saveUser(UserDO userDO){
+      this.userDAO.save(userDO);
+     }
+   /*TERMINA CONFIGURACION DE USUARIO*/
+  /*INICIA CONFIGURACION DE SERVICIOS*/
+    @Autowired
+      ServicesDAO servicesDAO;
+    @Override
+      public List<ServicesDO>getAllServices(){
+      return (List<ServicesDO>)this.servicesDAO.findAll();
+    }
+    @Override
+      public void saveServices(ServicesDO servicesDO){
+      this.servicesDAO.save(servicesDO);
+    }
+  /*TERMINA CONFIGURACION DE SERVICIOS*/
   /*
     @Override
     public void createUser(UserDO userDO) {

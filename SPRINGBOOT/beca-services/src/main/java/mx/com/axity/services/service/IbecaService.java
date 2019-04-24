@@ -2,14 +2,28 @@ package mx.com.axity.services.service;
 
 import mx.com.axity.commons.to.UserTO;
 import mx.com.axity.model.LoginDO;
+import mx.com.axity.model.ServicesDO;
 import mx.com.axity.model.UserDO;
 
 import java.util.List;
 
 public interface IbecaService {
 
-  List<UserDO> getAllUsers();
-  void saveUser(UserDO userDO);
+  /*INICIA CONFIGURACION DEL USUARIO*/
+    List<UserDO> getAllUsers();
+    void saveUser(UserDO userDO);
+  /*TERMINA CONFIGURACION DEL USUARIO*/
+  /*INICIA CONFIGURACION DE LOS SERVICIOS*/
+    List<ServicesDO>getAllServices();
+    void saveServices(ServicesDO servicesDO);
+  /*TERMINA CONFIGURACION DE LOS SERVICIOS*/
+
+
+
+
+
+
+
 
 /*
     int sum(int sum1, int sum2);

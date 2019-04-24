@@ -1,15 +1,28 @@
 package mx.com.axity.services.facade;
 
 import mx.com.axity.commons.to.LoginTO;
+import mx.com.axity.commons.to.ServicesTO;
 import mx.com.axity.commons.to.UserTO;
+import mx.com.axity.model.ServicesDO;
 import mx.com.axity.model.UserDO;
 
 import java.util.List;
 
 public interface IbecaFacade {
-  List<UserTO> getAllUsers();
-  void saveUser(UserTO userTO);
-/*
+
+  /*INICIA CONFIGURACION DEL USUARIO*/
+    List<UserTO> getAllUsers();
+    void saveUser(UserTO userTO);
+  /*TERMINA CONFIGURACION DEL USUARIO*/
+  /*INICIA CONFIGURACION DE LOS SERVICIOS*/
+    List<ServicesTO>getAllServices();
+    void saveServices(ServicesTO servicesTO);
+  /*TERMINA CONFIGURACION DE LOS SERVICIOS*/
+
+
+
+
+  /*
     int operation(int num1, int num2);
 
     List<UserTO> getAllUsers();

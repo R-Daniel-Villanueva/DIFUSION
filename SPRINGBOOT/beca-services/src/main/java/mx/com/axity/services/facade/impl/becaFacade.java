@@ -1,8 +1,10 @@
 package mx.com.axity.services.facade.impl;
 
 import mx.com.axity.commons.to.LoginTO;
+import mx.com.axity.commons.to.ServicesTO;
 import mx.com.axity.commons.to.UserTO;
 import mx.com.axity.model.LoginDO;
+import mx.com.axity.model.ServicesDO;
 import mx.com.axity.model.UserDO;
 import mx.com.axity.services.facade.IbecaFacade;
 import mx.com.axity.services.service.IbecaService;
@@ -18,24 +20,42 @@ import java.util.List;
 @Component
 public class becaFacade implements IbecaFacade {
 
+
   @Autowired
   private IbecaService becaService;
   @Autowired
   ModelMapper modelMapper;
 
-  @Override
-  public List<UserTO>getAllUsers(){
-    List<UserDO> userDOList = this.becaService.getAllUsers();
-    Type userTOType = new TypeToken<List<UserTO>>(){}.getType();
-    List<UserTO> result = this.modelMapper.map(userDOList,userTOType);
-    return result;
-  }
-  @Override
-  public void saveUser(UserTO userTO){
-    Type userDOType = new TypeToken<UserDO>(){}.getType();
-    UserDO userDO =this.modelMapper.map(userTO,userDOType);
-    this.becaService.saveUser(userDO);
-  }
+  /*INICIA CONFIGURACION DE USUARIO*/
+    @Override
+    public List<UserTO>getAllUsers(){
+      List<UserDO> userDOList = this.becaService.getAllUsers();
+      Type userTOType = new TypeToken<List<UserTO>>(){}.getType();
+      List<UserTO> result = this.modelMapper.map(userDOList,userTOType);
+      return result;
+    }
+    @Override
+    public void saveUser(UserTO userTO){
+      Type userDOType = new TypeToken<UserDO>(){}.getType();
+      UserDO userDO =this.modelMapper.map(userTO,userDOType);
+      this.becaService.saveUser(userDO);
+    }
+  /*TERMINA CONFIGURACION DE USUARIO*/
+  /*INICIA CONFIGURACION DE SERVICIOS*/
+    @Override
+    public List<ServicesTO>getAllServices(){
+      List<ServicesDO> servicesDOList= this.becaService.getAllServices();
+      Type servicesTOType = new TypeToken<List<ServicesTO>>(){}.getType();
+      List<ServicesTO> result = this.modelMapper.map(servicesDOList,servicesTOType);
+      return result;
+    }
+    @Override
+    public void saveServices (ServicesTO servicesTO){
+      Type servicesDOType = new TypeToken<ServicesDO>(){}.getType();
+      ServicesDO servicesDO= this.modelMapper.map(servicesTO,servicesDOType);
+      this.becaService.saveServices(servicesDO);
+    }
+  /*TERMINA CONFIGURACION DE USUARIOS*/
 
   /*
             @Override

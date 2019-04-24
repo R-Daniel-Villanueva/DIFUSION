@@ -2,6 +2,7 @@ package mx.com.axity.web.rest;
 
 import io.swagger.annotations.Api;
 import mx.com.axity.commons.to.LoginTO;
+import mx.com.axity.commons.to.ServicesTO;
 import mx.com.axity.commons.to.UserTO;
 import mx.com.axity.services.facade.IbecaFacade;
 import org.apache.logging.log4j.LogManager;
@@ -21,6 +22,8 @@ public class HelloController {
 
   static final Logger LOG =LogManager.getLogger(HelloController.class);
 
+
+/*INICIA CONFIGURACION DE USUARIO*/
   @Autowired
   IbecaFacade IbecaFacade;
   @RequestMapping(value = "/users", method = RequestMethod.GET, produces = "application/json")
@@ -36,9 +39,22 @@ public class HelloController {
     this.IbecaFacade.saveUser(userTO);
     return new ResponseEntity<>(HttpStatus.OK);
   }
+/*TERMINA CONFIGURACION DE USUARIO*/
+/*INICIA CONFIGURACION DE SEVICIOS*/
+  @RequestMapping(value = "/services", method = RequestMethod.GET, produces = "application/json")
+  public ResponseEntity<List<ServicesTO>> getAllServices(){
+    LOG.info("SE INVOCA /SERVICES");
+    List<ServicesTO> services= this.IbecaFacade.getAllServices();
+    return new ResponseEntity<>(services,HttpStatus.OK);
+  }
 
-
-
+  @RequestMapping(value = "/saveservices", method = RequestMethod.POST,produces = "application/json")
+  public ResponseEntity saveServices(@RequestBody ServicesTO servicesTO){
+    LOG.info("Se invoca /saveServices");
+    this.IbecaFacade.saveServices(servicesTO);
+    return new ResponseEntity<>(HttpStatus.OK);
+  }
+/*TERMIAN CONFIGURACION DE SERVICIOS*/
 
   /*
   @RequestMapping(value = "/create_user", method = RequestMethod.POST, produces = "application/json")

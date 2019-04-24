@@ -1,6 +1,6 @@
 page-mysite {
-    .fab-ios {
-        //color: #fff;
+    .container_pin{
+        height: 55px;
         background-color: darkblue;
     }
     .item-ios p{
@@ -12,8 +12,14 @@ page-mysite {
         padding: 2px;
         text-align: justify;
     }
-    p.post_p,h2.post_p{
+    p.post_p,h2.post_p,h3.post_p{
         white-space: normal;
         text-align: justify;
+    }
+    h2.post_p,h3.post_p{
+        color:white;
+    }
+    h3.post_p{
+        font-size: 15px;
     }
 }

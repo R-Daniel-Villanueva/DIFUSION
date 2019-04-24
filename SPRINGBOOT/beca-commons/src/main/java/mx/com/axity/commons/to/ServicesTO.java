@@ -5,6 +5,14 @@ import java.io.Serializable;
 public class ServicesTO implements Serializable {
   private Long id;
   private String name;
+  private String description;
+  private String mail;
+  private String phone;
+  private String ubication;
+  private String address;
+  private Long views;
+  private String picture;
+  private Long fk_kind;
 
   public Long getId() {
     return id;
@@ -78,12 +86,12 @@ public class ServicesTO implements Serializable {
     this.fk_kind = fk_kind;
   }
 
-  private String description;
-  private String mail;
-  private String phone;
-  private String ubication;
-  private String address;
-  private Long views;
-  private Long fk_kind;
+  public String getPicture() {
+    return picture;
+  }
+
+  public void setPicture(String picture) {
+    this.picture = picture;
+  }
 
 }

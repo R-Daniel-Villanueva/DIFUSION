@@ -11,37 +11,50 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-card class="main-card">
+    <ion-slides pager>
 
-        <img src="https://i0.wp.com/foodandpleasure.com/wp-content/uploads/2018/06/restaurantes-bonitos-cdmx-aromas-.jpg?fit=2026%2C1266&ssl=1">
-        <ion-fab right top>
-          <button ion-fab>
-            <ion-icon name="pin"></ion-icon>
-          </button>
-        </ion-fab>
-        <ion-item>
-          <ion-icon name="information-circle" item-start large ></ion-icon>
-          <h2 class="post_p">La Fonte Santa</h2>
-          <p class="post_p">14 S. Hop Avenue, Madison, WI 53703</p>
-        </ion-item>
-        <ion-item>
-          <p class="post_p">Restaurante 4 estrellas reconocido por sus platillos de estilo contemporaneo, preparados por el chef Antoni Mastra</p>
-        </ion-item>
-        <ion-item>
-          <ion-icon name="eye" item-start large></ion-icon>
-          <h2>4532</h2>
-          <p>Vistas totales a tu sitio</p>
-        </ion-item>
+        <ion-slide style="background-color: green">
+            <ion-card class="main-card">
+
+                <img src="https://i0.wp.com/foodandpleasure.com/wp-content/uploads/2018/06/restaurantes-bonitos-cdmx-aromas-.jpg?fit=2026%2C1266&ssl=1">
+                <ion-fab right top>
+                  <button ion-fab class="container_pin">
+                    <ion-icon name="pin"></ion-icon>
+                  </button>
+                </ion-fab>
+                <ion-item>
+                  <ion-icon class="icon_card" name="information-circle" item-start  color="bussines-color-primary" large ></ion-icon>
+                  <h2 class="post_p">La Fonte Santa</h2>
+                  <h3 class="post_p">14 S. Hop Avenue, Madison, WI 53703</h3>
+                </ion-item>
+                <ion-item>
+                  <p class="post_p">Restaurante 4 estrellas reconocido por sus platillos de estilo contemporaneo, preparados por el chef Antoni Mastra</p>
+                </ion-item>
+                <ion-item>
+                  <ion-icon name="eye" color="bussines-color-primary" item-start large></ion-icon>
+                  <h2 class="post_p">4532</h2>
+                  <p>Vistas totales a tu sitio</p>
+                </ion-item>
+                <ion-item>
+                  <span item-start>Calificación: </span>
+                  <button ion-button color="selectedg" icon-start clear item-end>
+                    <ion-icon color="star" name="star"></ion-icon>
+                    4.5
+                  </button>
+                </ion-item>
+              
+              </ion-card>
+        </ion-slide>
       
+        <ion-slide style="background-color: blue">
+          <h2>Slide 2</h2>
+        </ion-slide>
       
-        <ion-item>
-          <span item-start>Calificación: </span>
-          <button ion-button color="selectedg" icon-start clear item-end>
-            <ion-icon color="star" name="star"></ion-icon>
-            4.5
-          </button>
-        </ion-item>
+        <ion-slide style="background-color: red">
+          <h2>Slide 3</h2>
+        </ion-slide>
       
-      </ion-card>
+      </ion-slides>
+    
 
 </ion-content>

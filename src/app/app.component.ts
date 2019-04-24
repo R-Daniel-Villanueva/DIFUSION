@@ -3,14 +3,15 @@ import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { HomePage } from '../pages/home/home';
-//import { SettingsPage } from '../pages/settings/settings';
-//import { MysitePage } from '../pages/mysite/mysite';
+//import { HomePage } from '../pages/home/home';
+import { SettingsPage } from '../pages/settings/settings';
+import { MysitePage } from '../pages/mysite/mysite';
+//import { TrueAccessPage } from '../pages/true-access/true-access';
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = HomePage;
+  rootPage:any = SettingsPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {
